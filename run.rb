@@ -166,6 +166,12 @@ def parse_first_role(page)
   "&color(#FF0000,){狂人};"
 end
 
+def parse_sudden_death(page)
+  page.search('//table[@cellpadding="0"]//tr')
+      .select{|tr| tr.text.include?("突然死しました・・・。【ペナルティ】")}
+      .length
+end
+
 def crawlparse_kako_page(log_number)
   url = wakamete_kako_url(log_number)
   agent = mechanize_instance
@@ -179,8 +185,10 @@ def crawlparse_kako_page(log_number)
   end_date = "#{parse_end_date(page)}日"
   winner =  parse_winner(page)
   first_role = parse_first_role(page)
+  sudden_death_count = parse_sudden_death(page)
+  sudden_death_text = sudden_death_count == 0 ? "なし" : sudden_death_count
 
-  "|#{log_number}|#{village_text}|#{people_text}|#{role_text}|#{end_date}|#{winner}|#{first_role}|なし|"
+  "|#{log_number}|#{village_text}|#{people_text}|#{role_text}|#{end_date}|#{winner}|#{first_role}|#{sudden_death_text}|"
 end
 
 def twitter_client_instance(consumer_key, consumer_secret, access_token, access_token_secret)
@@ -211,11 +219,19 @@ if __FILE__ == $PROGRAM_NAME
   end
 
   print("#{log_numbers.length}件の新しい村が建てられています。\n")
+  last_log_number = config[:last_log]
   log_numbers.each do |log_number|
     sleep 5
     send_text = crawlparse_kako_page(log_number)
     next if send_text == ""
     print("#{send_text}\n")
+    STDOUT.flush
+    last_log_number = [last_log_number, log_number].max
     client.create_direct_message('iga_xx_pri', send_text)
+  end
+  config[:last_log] = last_log_number
+
+  open("./data.yml", "w") do |f|
+    YAML.dump(config, f)
   end
 end
