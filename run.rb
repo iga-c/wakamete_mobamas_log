@@ -227,7 +227,7 @@ if __FILE__ == $PROGRAM_NAME
     print("#{send_text}\n")
     STDOUT.flush
     last_log_number = [last_log_number, log_number].max
-    client.create_direct_message('iga_xx_pri', send_text)
+    client.create_direct_message('yoshi_mobamas', send_text)
   end
   config[:last_log] = last_log_number
 
