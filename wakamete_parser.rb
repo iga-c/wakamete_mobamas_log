@@ -40,16 +40,15 @@ class WakameteParser
 
   #
   # 役職の人数一覧をハッシュで返す。
-  # 例: {"村人" => 5, "人狼" => 2, "占い師" => 1, "霊能者" => 1, "狩人" => 1, "狂人" => 1, "共有者" => 0, "妖狐" => 1}
+  # 例: {"村人" => 5, "狼" => 2, "占い師" => 1, "霊能者" => 1, "狩人" => 1, "狂人" => 1, "共有者" => 0, "妖狐" => 1}
   #
   def role
     tr_array = first_night_tr
     role_text = tr_array[-2].text
-    role_list = ["村人", "人狼", "占い師", "霊能者", "狩人", "狂人", "共有者", "妖狐"]
+    role_list = ["村人", "狼", "占い師", "霊能者", "狩人", "狂人", "共有者", "妖狐"]
     results_hash = {}
 
-    role_list
-        .select{|r| !role_text.include?(r)}
+    role_list.select{|r| role_text.include?(r)}
         .each{|r| results_hash[r] = role_count(role_text, r)}
 
     results_hash
@@ -85,8 +84,11 @@ class WakameteParser
     target_td = table_td.select{|td| td.text.include?("初日犠牲者") }.first
     return "村人" if target_td.text.include?("村　人")
     return "狩人" if target_td.text.include?("狩　人")
+    return "狂人" if target_td.text.include?("狂　人")
+    return "占い師" if target_td.text.include?("占い師")
+    return "霊能者" if target_td.text.include?("霊能者")
 
-    target_td.text
+    "共有者"
   end
 
   #
