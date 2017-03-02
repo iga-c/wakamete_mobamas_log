@@ -59,7 +59,7 @@ if __FILE__ == $PROGRAM_NAME
   create_yml_hash = {
       consumer_key: option[:consumer_key],
       consumer_secret: option[:consumer_secret],
-      accsess_token: access_token,
+      access_token: access_token,
       access_secret: access_secret,
       last_log: option[:last_log].to_i
   }
