@@ -14,7 +14,7 @@ end
 if __FILE__ == $PROGRAM_NAME
   option = options
   if option[:last_log].nil?
-    print('最後に追加されたログの番地を実行時に与えてください。\n')
+    print("最後に追加されたログの番地を実行時に与えてください。\n")
     exit
   end
 
