@@ -29,4 +29,15 @@ class MobamasParser < WakameteParser
 
     result_hash
   end
+
+  def first_death_role
+    result_role = super
+    role_hash = role
+    tr_array = @page.search('//table[@cellpadding="0"]//tr')
+
+    return '狂信者' if result_role == '狂人' && role_hash.keys.include?('狂信者')
+    return '背徳者' if tr_array.any?{|tr| tr.text.start_with?('◆ゲームマスター') && tr.text.include?('背徳者は初日')}
+
+    result_role
+  end
 end
