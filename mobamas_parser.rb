@@ -60,7 +60,7 @@ class MobamasParser < WakameteParser
     add_village_type = '&color(Maroon){(死神手帳)};' if village_type == '死神手帳'
     add_village_type = '&color(Maroon){(デビルトリガー)};' if village_type == 'デビルトリガー'
     add_village_type = '&color(Blue){(探偵)};' if village_type == '探偵'
-    village_text = "[[#{village_name}#{add_village_type}}>#{wakamete_kako_url(@log_number)}]]"
+    village_text = "[[#{village_name}#{add_village_type}>#{wakamete_kako_url(@log_number)}]]"
 
     pop_text = "#{population}人"
 
