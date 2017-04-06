@@ -45,7 +45,7 @@ class WakameteParser
   def role
     tr_array = first_night_tr
     role_text = tr_array[-2].text
-    role_list = ["村人", "狼", "占い師", "霊能者", "狩人", "狂人", "共有者", "妖狐"]
+    role_list = ["村人", "狼", "占い師", "霊能者", "狩人", "狂人", "共有者", "妖狐", "猫又"]
     results_hash = {}
 
     role_list.select{|r| role_text.include?(r)}
