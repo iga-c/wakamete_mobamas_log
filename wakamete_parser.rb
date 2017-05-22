@@ -72,6 +72,7 @@ class WakameteParser
     return "村人" if td_list.any?{|td| td.text == "人狼の血を根絶することに成功し、猫又は村を去って行った。" }
     return "人狼" if td_list.any?{|td| td.text == "最後の一人を食い殺すと人狼達は次の獲物を求めて村を後にした・・・。" }
     return "妖狐" if td_list.any?{|td| td.text == "人狼がいなくなった今、我の敵などもういない。" }
+    return "妖狐" if td_list.any?{|td| td.text == "マヌケな人狼どもを騙すことなど容易いことだ。" }
 
     "引分"
   end
