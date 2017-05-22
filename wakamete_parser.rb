@@ -47,6 +47,7 @@ class WakameteParser
     role_text = tr_array[-2].text
     role_list = ["村人", "狼", "占い師", "霊能者", "狩人", "狂人", "共有者", "妖狐", "猫又"]
     results_hash = {}
+    role_list.each{|r| results_hash[r] = 0 }
 
     role_list.select{|r| role_text.include?(r)}
         .each{|r| results_hash[r] = role_count(role_text, r)}

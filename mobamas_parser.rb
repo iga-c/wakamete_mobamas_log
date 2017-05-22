@@ -72,16 +72,16 @@ class MobamasParser < WakameteParser
 
     role_hash = role
     role_text = ''
-    role_text += "占#{role_hash['占い師'] == 1 ? '' : role_hash['占い師']}/" if role_hash.keys.include?('占い師')
-    role_text += "霊#{role_hash['霊能者'] == 1 ? '' : role_hash['霊能者']}/" if role_hash.keys.include?('霊能者')
-    role_text += "狩#{role_hash['狩人'] == 1 ? '' : role_hash['狩人']}/" if role_hash.keys.include?('狩人')
+    role_text += "占#{role_hash['占い師'] == 1 ? '' : role_hash['占い師']}/" unless role_hash['占い師'].zero?
+    role_text += "霊#{role_hash['霊能者'] == 1 ? '' : role_hash['霊能者']}/" unless role_hash['霊能者'].zero?
+    role_text += "狩#{role_hash['狩人'] == 1 ? '' : role_hash['狩人']}/" unless role_hash['狩人'].zero?
     role_text += "&color(pink,){猫#{role_hash['猫又'] == 1 ? '' : role_hash['猫又']}};/" if role_hash.keys.include?('猫又')
-    role_text += "共#{role_hash['共有者'] == 1 ? '' : role_hash['共有者']}/" if role_hash.keys.include?('共有者')
+    role_text += "共#{role_hash['共有者'] == 1 ? '' : role_hash['共有者']}/" unless role_hash['共有者'].zero?
     role_text += "村#{role_hash['村人'] == 1 ? '' : role_hash['村人']}/" if role_hash.keys.include?('村人')
-    role_text += "狂#{role_hash['狂人'] == 1 ? '' : role_hash['狂人']}/" if role_hash.keys.include?('狂人') && role_hash['狂人'] != 0
+    role_text += "狂#{role_hash['狂人'] == 1 ? '' : role_hash['狂人']}/" unless role_hash['狂人'].zero?
     role_text += "&color(blueviolet,){狂信#{role_hash['狂信者'] == 1 ? '' : role_hash['狂信者']}};/"  if role_hash.keys.include?('狂信者')
     role_text += "&color(#FF0000,){狼#{role_hash['狼'] == 1 ? '' : role_hash['狼']}};/" if role_hash.keys.include?('狼')
-    role_text += "&color(#FFA500,){狐#{role_hash['妖狐'] == 1 ? '' : role_hash['妖狐']}};#{powerup_fox_text}/" if role_hash.keys.include?('妖狐')
+    role_text += "&color(#FFA500,){狐#{role_hash['妖狐'] == 1 ? '' : role_hash['妖狐']}};#{powerup_fox_text}/" if role_hash.keys.include?('妖狐') && role_hash['妖狐'] != 0
     role_text += "&color(orange,){背徳#{role_hash['背徳者'] == 1 ? '' : role_hash['背徳者']}};/"  if role_hash.keys.include?('背徳者')
     role_text = role_text[0, role_text.length - 1]
 
