@@ -75,7 +75,7 @@ class MobamasParser < WakameteParser
     role_text += "占#{role_hash['占い師'] == 1 ? '' : role_hash['占い師']}/" unless role_hash['占い師'].zero?
     role_text += "霊#{role_hash['霊能者'] == 1 ? '' : role_hash['霊能者']}/" unless role_hash['霊能者'].zero?
     role_text += "狩#{role_hash['狩人'] == 1 ? '' : role_hash['狩人']}/" unless role_hash['狩人'].zero?
-    role_text += "&color(pink,){猫#{role_hash['猫又'] == 1 ? '' : role_hash['猫又']}};/" if role_hash.keys.include?('猫又')
+    role_text += "&color(pink,){猫#{role_hash['猫又'] == 1 ? '' : role_hash['猫又']}};/" unless role_hash['猫又'].zero?
     role_text += "共#{role_hash['共有者'] == 1 ? '' : role_hash['共有者']}/" unless role_hash['共有者'].zero?
     role_text += "村#{role_hash['村人'] == 1 ? '' : role_hash['村人']}/" if role_hash.keys.include?('村人')
     role_text += "狂#{role_hash['狂人'] == 1 ? '' : role_hash['狂人']}/" unless role_hash['狂人'].zero?
